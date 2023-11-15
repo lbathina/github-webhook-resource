@@ -47,7 +47,13 @@ stdin.on('end', function () {
 
 function buildUrl(source, params) {
     const instanceVars = buildInstanceVariables(params);
-    return encodeURI(`${env.ATC_EXTERNAL_URL}/api/v1/teams/${env.BUILD_TEAM_NAME}/pipelines/${params.pipeline ? params.pipeline : env.BUILD_PIPELINE_NAME}/resources/${params.resource_name}/check/webhook?webhook_token=${params.webhook_token}${instanceVars}`);
+    const webhookUrl = params.url
+    if (webhookUrl){
+        return encodeURI(`${webhookUrl}/api/v1/teams/${env.BUILD_TEAM_NAME}/pipelines/${params.pipeline ? params.pipeline : env.BUILD_PIPELINE_NAME}/resources/${params.resource_name}/check/webhook?webhook_token=${params.webhook_token}${instanceVars}`);
+    }else
+    {
+        return encodeURI(`${env.ATC_EXTERNAL_URL}/api/v1/teams/${env.BUILD_TEAM_NAME}/pipelines/${params.pipeline ? params.pipeline : env.BUILD_PIPELINE_NAME}/resources/${params.resource_name}/check/webhook?webhook_token=${params.webhook_token}${instanceVars}`);
+    }
 }
 
 function buildInstanceVariables(params) {
@@ -84,7 +90,8 @@ async function processWebhook(source, params) {
 
     const config = {
         'url': url,
-        'content-type': 'json'
+        'content-type': 'json',
+        'secret' : params.secret
     };
 
     const body = {

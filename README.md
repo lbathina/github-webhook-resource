@@ -50,6 +50,8 @@ Create or delete a webhook using the configured parameters.
     webhook_token: your-token
     operation: create
     events: [push, pull_request]
+    url: your-url-for-webhook
+    secret: webhook-secret
     pipeline: pipeline-name
     pipeline_instance_vars: {
         your_instance_var_name: value
@@ -66,6 +68,8 @@ Create or delete a webhook using the configured parameters.
 -   `events`: *Optional*. An array of [events](https://developer.github.com/webhooks/#events) which will trigger your webhook. Default: `push`
 -	`pipeline`: *Optional.* Defaults to the name of the pipeline executing the task
 -	`pipeline_instance_vars`: *Optional.* Instance vars to append to the webhook url. These help Concourse identify which [instance pipeline](https://concourse-ci.org/resources.html#schema.resource.webhook_token) it should invoke
+-	`url`: *Optional.* Defaults to the ATC_EXTERNAL_URL set on concourse environment
+-	`secret`: *Optional.* secret for webhooks
 
 ## Example
 Include the github-webhook-resource in your pipeline.yml file

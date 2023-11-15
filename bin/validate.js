@@ -34,6 +34,8 @@ const configSchema = {
                 repo:          { type: 'string' },
                 resource_name: { type: 'string' },
                 webhook_token: { type: 'string' },
+                secret: {type : 'string'},
+                url: {type: 'string'},
                 events:        {
                     type: 'array',
                     items: {
