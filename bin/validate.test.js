@@ -70,6 +70,8 @@ describe('validate.input', () => {
                 repo: '',
                 resource_name: '',
                 webhook_token: '',
+                secret: '',
+                url: '',
                 operation: 'create'
             }
         };
@@ -118,6 +120,8 @@ describe('validate.input', () => {
             'params.webhook_token',
             'params.operation',
             'params.pipeline',
+            'params.secret',
+            'params.url',
         ];
 
         constrainedFields.forEach(field => {
